@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="BRUCE KEEPS — Make your memories last forever. A romantic digital memory website demo for couples."
+    />
+    <title>BRUCE KEEPS</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.5.3/qrcode.min.js"></script>
+  </head>
+  <body>
+    <!-- EASY CUSTOMIZATION AREA
+      Update these values for each customer.
+      - Couple name: YOUR NAME + YOUR LOVE
+      - Website title: BRUCE KEEPS
+      - Tagline: Make your memories last forever.
+      - 12 photo paths: images/photo1.jpg ... images/photo12.jpg
+      - 12 photo captions: update in script.js
+      - Timeline text: update in script.js
+      - Love letter: update in script.js
+      - Music file: audio/music.mp3
+      - Website URL for QR code: https://example.com
+      - Main colors: CSS variables in style.css
+    -->
+
+    <script>
+      window.siteConfig = {
+        siteName: "BRUCE KEEPS",
+        tagline: "Make your memories last forever.",
+        coupleName: "YOUR NAME",
+        partnerName: "YOUR LOVE",
+        heroSubtitle: "Every moment with you is a memory worth keeping.",
+        websiteURL: "https://Demo.com",
+        musicFile: "audio/music.mp3",
+        photoPaths: [
+          "images/photo1.jpg",
+          "images/photo2.jpg",
+          "images/photo3.jpg",
+          "images/photo4.jpg",
+          "images/photo5.jpg",
+          "images/photo6.jpg",
+          "images/photo7.jpg",
+          "images/photo8.jpg",
+          "images/photo9.jpg",
+          "images/photo10.jpg",
+          "images/photo11.jpg",
+          "images/photo12.jpg",
+        ],
+        photoCaptions: [
+          "OUR FIRST MEMORY",
+          "OUR FAVORITE DAY",
+          "TOGETHER",
+          "MY FAVORITE PERSON",
+          "ONE SPECIAL MOMENT",
+          "FOREVER",
+          "US",
+          "LOVE NOTES",
+          "THE BEST PART",
+          "SMILING TOGETHER",
+          "CHERISHED MOMENTS",
+          "OUR STORY",
+        ],
+        timeline: [
+          {
+            title: "THE BEGINNING",
+            text: "Where our story started.",
+          },
+          {
+            title: "THE FIRST MEMORY",
+            text: "One of the moments we will always remember.",
+          },
+          {
+            title: "MORE MEMORIES",
+            text: "Every day became another story.",
+          },
+          {
+            title: "TO BE CONTINUED...",
+            text: "Our story is still being written.",
+          },
+        ],
+        letterText: `Dear You,
+
+Every photo holds a memory, and every memory holds a story.
+
+This little website is a collection of the moments that made our journey special.
+
+Here's to all the memories we've made and all the memories still waiting for us.
+
+With love,
+Your Person ♡`,
+        colors: {
+          rose: "#f5dfe5",
+          dusty: "#d1a4a7",
+          blush: "#f7e7e3",
+          cream: "#f9f4ef",
+          paper: "#fffaf8",
+          brown: "#684f4c",
+          gold: "#baa07d",
+          ink: "#3a2d2f",
+          shadow: "rgba(90, 62, 60, 0.12)",
+        },
+      };
+    </script>
+
+    <div class="page-shell">
+      <div class="petal-layer" id="petalLayer" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">BK</div>
+          <div class="brand-meta">
+            <span class="brand-name" data-role="site-name">BRUCE KEEPS</span>
+            <span class="brand-tagline" data-role="tagline"
+              >Make your memories last forever.</span
+            >
+          </div>
+        </div>
+
+        <button
+          class="nav-toggle"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+          <a href="#home">HOME</a>
+          <a href="#memories">MEMORIES</a>
+          <a href="#story">OUR STORY</a>
+          <a href="#letter">LETTER</a>
+          <a href="#qr-code">QR CODE</a>
+        </nav>
+      </header>
+
+      <main>
+        <section id="home" class="hero reveal-section">
+          <div class="hero-copy">
+            <p class="section-kicker">OUR LITTLE STORY</p>
+            <h1 data-role="hero-subtitle">
+              Every moment with you is a memory worth keeping.
+            </h1>
+
+            <div class="name-row" aria-label="Couple names">
+              <span data-role="couple-name">YOUR NAME</span>
+              <span class="heart">♡</span>
+              <span data-role="partner-name">YOUR LOVE</span>
+            </div>
+
+            <div class="hero-actions">
+              <a href="#memories" class="primary-btn">BEGIN OUR STORY ↓</a>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="hero-card hero-card-large">
+              <span class="mini-label">OUR LOVE</span>
+            </div>
+            <div class="hero-card hero-card-small top-card"></div>
+            <div class="hero-card hero-card-small bottom-card"></div>
+          </div>
+        </section>
+
+        <section id="memories" class="gallery reveal-section">
+          <div class="section-heading center-heading">
+            <p class="section-kicker">THE ALBUM</p>
+            <h2>OUR PHOTOS</h2>
+          </div>
+          <div id="photoGrid" class="photo-grid" aria-live="polite"></div>
+        </section>
+
+        <section id="story" class="timeline reveal-section">
+          <div class="section-heading center-heading">
+            <p class="section-kicker">OUR STORY</p>
+            <h2>OUR MEMORIES</h2>
+          </div>
+
+          <div class="timeline-wrap">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div id="timelineList" class="timeline-list"></div>
+          </div>
+        </section>
+
+        <section id="letter" class="letter-section reveal-section">
+          <div class="section-heading center-heading">
+            <p class="section-kicker">A LITTLE LETTER FOR YOU</p>
+          </div>
+
+          <div class="letter-paper">
+            <div class="letter-ornament">✦</div>
+            <p id="loveLetter" class="letter-text">
+              Dear You,<br /><br />
+              Every photo holds a memory, and every memory holds a story.<br /><br />
+              This little website is a collection of the moments that made our
+              journey special.<br /><br />
+              Here's to all the memories we've made and all the memories still
+              waiting for us.<br /><br />
+              With love,<br />
+              Your Person ♡
+            </p>
+          </div>
+        </section>
+
+        <section id="qr-code" class="qr-section reveal-section">
+          <div class="section-heading center-heading">
+            <p class="section-kicker">SCAN OUR STORY</p>
+            <h2>OUR DIGITAL MEMORY</h2>
+          </div>
+
+          <div class="qr-box">
+            <div
+              id="qrCode"
+              class="qr-code"
+              aria-label="QR code to our website"
+            ></div>
+            <p>Scan to open our memories.</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-brand">
+          <span>BRUCE KEEPS</span>
+          <small>Make your memories last forever.</small>
+        </div>
+        <p>Made with love ♡</p>
+      </footer>
+    </div>
+
+    <div class="music-player" aria-live="polite">
+      <button
+        id="musicToggle"
+        class="music-btn"
+        type="button"
+        aria-label="Play or pause music"
+      >
+        <span class="music-icon">♫</span>
+        <span>Our Song</span>
+      </button>
+      <audio id="musicPlayer" preload="none" src="audio/music.mp3"></audio>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
