@@ -236,30 +236,50 @@ const buildTimeline = () => {
 
 const buildQR = () => {
   const qrContainer = document.getElementById("qrCode");
+  const qrUploadInput = document.getElementById("customQrUpload");
   if (!qrContainer) return;
 
   const url = config.websiteURL || "https://example.com";
+  const savedQr = localStorage.getItem("bruce-keeps-custom-qr");
 
-  if (typeof qrcode !== "undefined" && qrcode) {
-    try {
-      const qr = qrcode(0, "L");
-      qr.addData(url);
-      qr.make();
-      qrContainer.innerHTML = qr.createSvgTag({
-        cellSize: 6,
-        margin: 4,
-        lineWidth: 1,
-        scalable: true,
-        type: "svg",
-      });
-      return;
-    } catch (error) {
-      console.warn("QR code could not be generated:", error);
-    }
+  const renderGeneratedQR = () => {
+    const encodedUrl = encodeURIComponent(url);
+    const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodedUrl}&ecc=L`;
+
+    qrContainer.innerHTML = `
+      <img
+        src="${qrImageUrl}"
+        alt="QR code for ${url}"
+        loading="lazy"
+      />
+    `;
+  };
+
+  const renderUploadedQR = (src) => {
+    qrContainer.innerHTML = `<img src="${src}" alt="Custom QR code" />`;
+  };
+
+  if (savedQr) {
+    renderUploadedQR(savedQr);
+  } else {
+    renderGeneratedQR();
   }
 
-  qrContainer.innerHTML =
-    '<div style="display:grid;place-items:center;width:100%;height:100%;font-size:2rem;letter-spacing:0.18em;color:#684f4c;">QR</div>';
+  if (qrUploadInput) {
+    qrUploadInput.addEventListener("change", (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (loadEvent) => {
+        const result = loadEvent.target && loadEvent.target.result;
+        if (!result) return;
+        localStorage.setItem("bruce-keeps-custom-qr", result);
+        renderUploadedQR(result);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
 };
 
 const createPetals = () => {

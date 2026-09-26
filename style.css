@@ -697,6 +697,14 @@ section {
   box-shadow: var(--soft-shadow);
 }
 
+.qr-code-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
 .qr-code {
   width: 220px;
   height: 220px;
@@ -708,9 +716,37 @@ section {
   border: 1px solid rgba(123, 87, 84, 0.18);
 }
 
+.qr-code img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+}
+
 .qr-code svg {
   width: 100%;
   height: 100%;
+}
+
+.qr-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(107, 79, 72, 0.18);
+  color: var(--brown);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(103, 78, 75, 0.08);
+}
+
+.qr-upload input {
+  display: none;
 }
 
 .qr-box p {

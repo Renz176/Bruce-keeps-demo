@@ -9,7 +9,6 @@
     />
     <title>BRUCE KEEPS</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.5.3/qrcode.min.js"></script>
   </head>
   <body>
     <!-- EASY CUSTOMIZATION AREA
@@ -33,7 +32,7 @@
         coupleName: "YOUR NAME",
         partnerName: "YOUR LOVE",
         heroSubtitle: "Every moment with you is a memory worth keeping.",
-        websiteURL: "https://Demo.com",
+        websiteURL: "https://renz176.github.io/Bruce-keeps-demo/",
         musicFile: "audio/music.mp3",
         photoPaths: [
           "images/photo1.jpg",
@@ -213,11 +212,17 @@ Your Person ♡`,
           </div>
 
           <div class="qr-box">
-            <div
-              id="qrCode"
-              class="qr-code"
-              aria-label="QR code to our website"
-            ></div>
+            <div class="qr-code-wrap">
+              <div
+                id="qrCode"
+                class="qr-code"
+                aria-label="QR code to our website"
+              ></div>
+              <label class="qr-upload" for="customQrUpload">
+                <span>Upload QR</span>
+                <input id="customQrUpload" type="file" accept="image/*" />
+              </label>
+            </div>
             <p>Scan to open our memories.</p>
           </div>
         </section>
