@@ -233,15 +233,25 @@ Your Person ♡`,
     </div>
 
     <div class="music-player" aria-live="polite">
-      <button
-        id="musicToggle"
-        class="music-btn"
-        type="button"
-        aria-label="Play or pause music"
-      >
-        <span class="music-icon">♫</span>
-        <span>Our Song</span>
-      </button>
+      <div class="music-controls">
+        <button
+          id="musicToggle"
+          class="music-btn"
+          type="button"
+          aria-label="Play or pause music"
+        >
+          <span class="music-icon">♫</span>
+          <span>Our Song</span>
+        </button>
+        <button
+          id="volumeToggle"
+          class="volume-btn"
+          type="button"
+          aria-label="Mute or unmute music"
+        >
+          <span class="volume-icon">🔊</span>
+        </button>
+      </div>
       <audio id="musicPlayer" preload="none" src="audio/music.mp3"></audio>
     </div>
 

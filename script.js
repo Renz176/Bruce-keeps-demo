@@ -336,6 +336,7 @@ const setupRevealAnimations = () => {
 const setupMusicPlayer = () => {
   const musicPlayer = document.getElementById("musicPlayer");
   const musicToggle = document.getElementById("musicToggle");
+  const volumeToggle = document.getElementById("volumeToggle");
   if (!musicPlayer || !musicToggle) return;
 
   const source = config.musicFile || "";
@@ -344,16 +345,47 @@ const setupMusicPlayer = () => {
   if (!source || !source.trim()) {
     if (label) label.textContent = "Add our song";
     musicToggle.disabled = true;
+    if (volumeToggle) volumeToggle.disabled = true;
     return;
   }
 
   musicPlayer.src = source;
+  musicPlayer.autoplay = true;
+  musicPlayer.loop = true;
+  musicPlayer.muted = false;
+  musicPlayer.volume = 0.7;
+
+  const updateVolumeButton = () => {
+    if (!volumeToggle) return;
+    const isMuted = musicPlayer.muted;
+    volumeToggle.classList.toggle("muted", isMuted);
+    volumeToggle.setAttribute(
+      "aria-label",
+      isMuted ? "Unmute music" : "Mute music",
+    );
+    volumeToggle.innerHTML = isMuted
+      ? '<span class="volume-icon">🔇</span>'
+      : '<span class="volume-icon">🔊</span>';
+  };
+
+  const startPlayback = async () => {
+    try {
+      await musicPlayer.play();
+      musicToggle.classList.add("playing");
+      if (label) label.textContent = "Our Song";
+    } catch (error) {
+      console.warn("Music could not autoplay:", error);
+      musicToggle.classList.remove("playing");
+      if (label) label.textContent = "Tap to play";
+    }
+  };
 
   musicToggle.addEventListener("click", async () => {
     try {
       if (musicPlayer.paused) {
         await musicPlayer.play();
         musicToggle.classList.add("playing");
+        if (label) label.textContent = "Our Song";
       } else {
         musicPlayer.pause();
         musicToggle.classList.remove("playing");
@@ -365,6 +397,17 @@ const setupMusicPlayer = () => {
     }
   });
 
+  if (volumeToggle) {
+    volumeToggle.addEventListener("click", () => {
+      musicPlayer.muted = !musicPlayer.muted;
+      updateVolumeButton();
+      if (!musicPlayer.muted && musicPlayer.paused) {
+        musicPlayer.play();
+        musicToggle.classList.add("playing");
+      }
+    });
+  }
+
   musicPlayer.addEventListener("pause", () => {
     musicToggle.classList.remove("playing");
   });
@@ -373,6 +416,9 @@ const setupMusicPlayer = () => {
     musicToggle.classList.remove("playing");
     if (label) label.textContent = "Add our song";
   });
+
+  updateVolumeButton();
+  startPlayback();
 };
 
 const applyColors = () => {
